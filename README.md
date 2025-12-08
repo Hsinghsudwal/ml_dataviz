@@ -11,6 +11,22 @@ A lightweight Python library for interactive data exploration and automatic insi
 - 💼 Generate analysis (`export_analysis_code()`)
 - 📈 Smart visualization
 
+```bash
+!pip install ml-dataviz
+
+## imports
+from dataviz import DataViz, analyze
+
+data = DataFrame
+dv = analyze(data)
+dv.show()
+dv.insights()
+dv.optimize()
+dv.visualize()
+dv.generate_code()
+# dv.export_analysis_code('my_analysis.py')
+dv.suggest_charts()
+```
 
 ## Installation
 
