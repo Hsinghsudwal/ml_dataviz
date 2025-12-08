@@ -1,14 +1,16 @@
 # DataViz
 
-A lightweight Python library for interactive data exploration and automatic insights, inspired by Mito and Lux.
+A lightweight Python library for interactive data exploration and automatic insights.
 
 ## Features
-
-- 📊 Interactive spreadsheet view of your data
-- 💡 Automatic insight generation
-- 📈 Smart visualization recommendations
 - 🔍 Data quality analysis
-- 🎯 Zero configuration required
+- 💡 Automatic insight generation
+- 🔧 Code Generation (`generate_code()`)
+- ⚡ Code Optimizer (`optimize()`)
+- 📊 Chart Builder (`suggest_charts()`)
+- 💼 Generate analysis (`export_analysis_code()`)
+- 📈 Smart visualization
+
 
 ## Installation
 
@@ -20,7 +22,7 @@ pip install -e .
 
 ```python
 import pandas as pd
-from dataviz import analyze
+from dataviz import enhanced
 
 # Load your data
 df = pd.read_csv('your_data.csv')
@@ -28,29 +30,47 @@ df = pd.read_csv('your_data.csv')
 # Create DataViz object
 dv = analyze(df)
 
-# View data
-dv.show()
+# View first N rows with interactive table
+dv.show(n=20)  # default is 20
 
-# Get insights
-dv.insights()
+# Get automatic insights
+dv.insights()  # Basic insights (5 by default)
+dv.insights(max_insights=10)  # More insights
+dv.insights(detailed=True, max_insights=15)  # Comprehensive analysis
 
-# Get visualization recommendations
-dv.visualize()
-```
+# Get optimization suggestions
+dv.optimize()
 
-```bash
-from dataviz import analyze
-import pandas as pd
+# Control number of charts and visualization recommendations
+dv.visualize(max_charts=2)      # Show only 2 charts
+dv.visualize(max_charts=6)      # Show 6 charts
+dv.visualize(max_charts=10)     # Show 10 charts
+dv.visualize(max_charts='all')  # Show all available charts (default)
 
-df = pd.read_csv('data.csv')
-dv = analyze(df)
+# Individual plots
+dv.plot_distribution('age', kind='hist')  # or 'kde', 'box'
+dv.plot_categorical('category', top_n=15)
+dv.plot_scatter('x_col', 'y_col', hue='category')
+dv.plot_correlation(method='pearson')  # or 'spearman', 'kendall'
+dv.plot_pairplot(columns=['col1', 'col2', 'col3'], hue='category')
 
-# Auto-generate 6 smart visualizations
-dv.visualize(max_plots=6)
+# Perform operations (these get tracked)
+dv.filter(df['col'] > value, "df['col'] > value")
+dv.sort_values('col', ascending=False)
+dv.drop_missing(['col'])
 
-# Or use specific plots
-dv.plot_correlation()
-dv.plot_scatter('x', 'y', hue='category')
-dv.plot_pairplot(columns=['a', 'b', 'c'], hue='group')
+# Generate code for your operations
+dv.generate_code(df_name='my_df', include_load=True)
+
+# Or export complete analysis code
+dv.export_analysis_code('my_analysis.py')
+
+# Suggest charts with code snippets
+dv.suggest_charts(max_charts=6)  # Get code for 6 charts
+dv.suggest_charts(max_charts='all')  # Get all suggestions
+
+# Reset to original DataFrame
+dv.reset()
+
 ```
 
