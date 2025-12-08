@@ -1,5 +1,5 @@
 def main():
-    print("Hello from dataviz!")
+    print("Hello ml_dataviz!")
 
 
 if __name__ == "__main__":
